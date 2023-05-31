@@ -50,7 +50,7 @@ function App() {
       auth.checkToken(jwt)
         .then((res) => {
           setLoggedIn(true);
-          setUserData(res.data.email);
+          setUserData(res.email);
           navigate("/");
         })
         .catch((err) => {

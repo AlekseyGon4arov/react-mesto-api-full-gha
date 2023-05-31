@@ -45,7 +45,7 @@ class Api {
 }
 
 const auth = new Api({
-  baseUrl: 'https://auth.nomoreparties.co'
+  baseUrl: 'https://api.mesto.goncharov.nomoredomains.rocks'
 });
 
 export default auth;
