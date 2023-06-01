@@ -60,12 +60,14 @@ function App() {
   },[navigate]);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((id) => id === currentUser._id);
     const action = isLiked ? api.deleteLike : api.addLike;
 
     action(card._id)
     .then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      setCards((state) => {
+        return state.map((c) => c._id === card._id ? newCard : c)
+      });
     })
     .catch((err) => {
       console.log(err);
