@@ -1,7 +1,7 @@
+const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { JWT_SECRET } = require('../utils/constans');
 const UnauthorizedErr = require('../errors/UnauthorizedErr');
 const ConflictErr = require('../errors/ConflictErr');
 const NotFoundErr = require('../errors/NotFoundErr');
@@ -27,7 +27,7 @@ const login = (req, res, next) => {
         if (!matched) {
           return next(new UnauthorizedErr('Неверные почта или пароль'));
         }
-        const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+        const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', {
           expiresIn: '7d',
         });
         return res.send({ token });
